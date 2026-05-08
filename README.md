@@ -59,11 +59,3 @@ npm run dev
 
 ### Frontend (.env)
 - `VITE_API_URL`: Backend API URL (`http://localhost:5000/api`)
-
-## 📝 Phase 1 Deliverables
-- [x] Project Structure
-- [x] Express Server + Health Check
-- [x] Prisma Schema + SQLite Setup
-- [x] Frontend Base + Tailwind
-- [x] Dashboard UI Placeholders
-- [x] Routing & Layouts
