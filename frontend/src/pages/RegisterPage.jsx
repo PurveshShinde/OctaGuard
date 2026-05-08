@@ -1,0 +1,88 @@
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Shield, Mail, Lock, User, ChevronRight } from 'lucide-react';
+import Button from '../components/Button';
+
+const RegisterPage = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // In Phase 1, we just redirect to the dashboard placeholder
+    navigate('/dashboard');
+  };
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
+      <div className="w-full max-w-md">
+        <div className="text-center mb-8">
+          <Link to="/" className="inline-flex items-center gap-2 mb-6">
+            <div className="w-10 h-10 bg-accent rounded-xl flex items-center justify-center">
+              <Shield className="w-6 h-6 text-white" />
+            </div>
+            <span className="text-2xl font-bold tracking-tight text-white">OctaGuard</span>
+          </Link>
+          <h2 className="text-3xl font-bold text-white mb-2">Create an account</h2>
+          <p className="text-zinc-400">Start securing your web applications today</p>
+        </div>
+
+        <div className="glass rounded-2xl p-8 shadow-2xl">
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div>
+              <label className="block text-sm font-medium text-zinc-400 mb-2">Full Name</label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                <input 
+                  type="text" 
+                  placeholder="John Doe" 
+                  className="w-full bg-zinc-900/50 border border-white/5 rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-zinc-400 mb-2">Email Address</label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                <input 
+                  type="email" 
+                  placeholder="name@company.com" 
+                  className="w-full bg-zinc-900/50 border border-white/5 rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-zinc-400 mb-2">Password</label>
+              <div className="relative">
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                <input 
+                  type="password" 
+                  placeholder="••••••••" 
+                  className="w-full bg-zinc-900/50 border border-white/5 rounded-xl py-3 pl-10 pr-4 text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition-all"
+                />
+              </div>
+            </div>
+
+            <p className="text-[10px] text-zinc-500 leading-relaxed">
+              By clicking "Create Account", you agree to our Terms of Service and Privacy Policy.
+            </p>
+
+            <Button className="w-full py-3 text-lg flex items-center justify-center gap-2">
+              Create Account <ChevronRight className="w-5 h-5" />
+            </Button>
+          </form>
+
+          <div className="mt-8 pt-8 border-t border-white/5 text-center">
+            <p className="text-zinc-500 text-sm">
+              Already have an account? {' '}
+              <Link to="/login" className="text-accent font-semibold hover:underline">Sign in</Link>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default RegisterPage;

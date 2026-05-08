@@ -1,0 +1,42 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  scans     Scan[]
+}
+
+model Scan {
+  id              String          @id @default(uuid())
+  userId          String
+  user            User            @relation(fields: [userId], references: [id])
+  targetUrl       String
+  status          String          @default("pending") // pending, in-progress, completed, failed
+  riskScore       Int             @default(0)
+  createdAt       DateTime        @default(now())
+  vulnerabilities Vulnerability[]
+}
+
+model Vulnerability {
+  id          String @id @default(uuid())
+  scanId      String
+  scan        Scan   @relation(fields: [scanId], references: [id], onDelete: Cascade)
+  name        String
+  risk        String // low, medium, high, critical
+  description String
+  url         String
+  solution    String
+}
