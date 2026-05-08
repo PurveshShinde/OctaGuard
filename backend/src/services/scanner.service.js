@@ -55,12 +55,17 @@ class ScannerService {
         maxRedirects: 5,
       });
 
-      const headers = response.headers;
-      const body = response.data;
+      // Normalize all headers to lowercase for reliable access
+      const normalizedHeaders = Object.fromEntries(
+        Object.entries(response.headers).map(([key, value]) => [
+          key.toLowerCase(),
+          value,
+        ])
+      );
 
       // Debug logging (temporary)
-      console.log(`--- [DEBUG] Headers for ${url} ---`);
-      console.log(headers);
+      console.log(`--- [DEBUG] Normalized Headers for ${url} ---`);
+      console.log(normalizedHeaders);
       console.log('--- [DEBUG] End ---');
 
       // 1. SSL/HTTPS Check
@@ -79,28 +84,28 @@ class ScannerService {
       const securityHeaders = [
         {
           name: 'Content-Security-Policy',
-          header: 'content-security-policy',
+          keys: ['content-security-policy', 'content-security-policy-report-only'],
           risk: 'medium',
           desc: 'CSP helps prevent XSS and data injection attacks.',
           sol: 'Add a Content-Security-Policy header to your web server configuration.'
         },
         {
           name: 'Strict-Transport-Security',
-          header: 'strict-transport-security',
+          keys: ['strict-transport-security'],
           risk: 'medium',
           desc: 'HSTS ensures the browser only communicates over HTTPS.',
           sol: 'Add the Strict-Transport-Security header with a sufficient max-age.'
         },
         {
           name: 'X-Frame-Options',
-          header: 'x-frame-options',
+          keys: ['x-frame-options'],
           risk: 'low',
           desc: 'Prevents the site from being embedded in frames (Clickjacking protection).',
           sol: 'Add X-Frame-Options: DENY or SAMEORIGIN.'
         },
         {
           name: 'X-Content-Type-Options',
-          header: 'x-content-type-options',
+          keys: ['x-content-type-options'],
           risk: 'low',
           desc: 'Prevents MIME type sniffing.',
           sol: 'Add X-Content-Type-Options: nosniff.'
@@ -108,14 +113,14 @@ class ScannerService {
       ];
 
       securityHeaders.forEach(sh => {
-        // Normalize header access
-        const headerValue = headers[sh.header.toLowerCase()];
-        if (!headerValue) {
+        const hasHeader = sh.keys.some(key => normalizedHeaders[key]);
+        
+        if (!hasHeader) {
           findings.push({
             name: `Missing ${sh.name}`,
             risk: sh.risk,
             description: sh.desc,
-            url: `https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/${sh.name}`,
+            url: `https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/${sh.keys[0]}`,
             solution: sh.sol
           });
           riskScore += sh.risk === 'high' ? 30 : sh.risk === 'medium' ? 15 : 5;
@@ -124,8 +129,8 @@ class ScannerService {
 
       // 3. Tech Detection
       const tech = [];
-      const serverHeader = headers['server'];
-      const poweredBy = headers['x-powered-by'];
+      const serverHeader = normalizedHeaders['server'];
+      const poweredBy = normalizedHeaders['x-powered-by'];
 
       if (serverHeader) tech.push(`Server: ${serverHeader}`);
       if (poweredBy) tech.push(`Engine: ${poweredBy}`);
