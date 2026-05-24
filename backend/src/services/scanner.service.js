@@ -131,10 +131,11 @@ class ScannerService {
       const tech = [];
       const serverHeader = normalizedHeaders['server'];
       const poweredBy = normalizedHeaders['x-powered-by'];
+      const body = typeof response.data === 'string' ? response.data : (response.data ? JSON.stringify(response.data) : '');
 
       if (serverHeader) tech.push(`Server: ${serverHeader}`);
       if (poweredBy) tech.push(`Engine: ${poweredBy}`);
-      if (typeof body === 'string') {
+      if (body) {
         if (body.includes('wp-content')) tech.push('CMS: WordPress');
         if (body.includes('id="root"') || body.includes('id="app"')) tech.push('Frontend: React/Vue/SPA');
       }

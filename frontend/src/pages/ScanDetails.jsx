@@ -126,8 +126,8 @@ const ScanDetails = () => {
           {!scan?.vulnerabilities || scan.vulnerabilities.length === 0 ? (
             <Card className="flex flex-col items-center justify-center py-12 text-center">
               <CheckCircle className="w-12 h-12 text-emerald-500 mb-4" />
-              <p className="text-white font-medium">No vulnerabilities found!</p>
-              <p className="text-sm text-zinc-500 mt-1">Your site follows basic security best practices.</p>
+              <p className="text-white font-medium">No header or SSL configuration issues detected.</p>
+              <p className="text-sm text-zinc-500 mt-1">Your site follows basic security header and encryption best practices.</p>
             </Card>
           ) : (
             scan.vulnerabilities.map((vuln, i) => (
