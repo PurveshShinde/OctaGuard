@@ -11,31 +11,38 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Dashboard from './pages/Dashboard';
 import ScanDetails from './pages/ScanDetails';
+import ScanHistory from './pages/ScanHistory';
+import Settings from './pages/Settings';
+
+// Context
+import { AppContextProvider } from './context/AppContext';
 
 function App() {
   return (
-    <Router>
-      <Toaster position="top-right" richColors expand={true} theme="dark" />
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+    <AppContextProvider>
+      <Router>
+        <Toaster position="top-right" richColors expand={true} theme="dark" />
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
 
-        {/* Dashboard Routes (Protected in future, currently open for UI review) */}
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/scans/:id" element={<ScanDetails />} />
-          <Route path="/new-scan" element={<div className="text-white p-8">New Scan UI Placeholder</div>} />
-          <Route path="/vulnerabilities" element={<div className="text-white p-8">Vulnerabilities UI Placeholder</div>} />
-          <Route path="/history" element={<div className="text-white p-8">Scan History UI Placeholder</div>} />
-          <Route path="/settings" element={<div className="text-white p-8">Settings UI Placeholder</div>} />
-        </Route>
+          {/* Dashboard Routes (Protected in future, currently open for UI review) */}
+          <Route element={<DashboardLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/scans/:id" element={<ScanDetails />} />
+            <Route path="/new-scan" element={<div className="text-white p-8">New Scan UI Placeholder</div>} />
+            <Route path="/vulnerabilities" element={<div className="text-white p-8">Vulnerabilities UI Placeholder</div>} />
+            <Route path="/history" element={<ScanHistory />} />
+            <Route path="/settings" element={<Settings />} />
+          </Route>
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Router>
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AppContextProvider>
   );
 }
 
