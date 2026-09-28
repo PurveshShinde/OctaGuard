@@ -1,97 +1,205 @@
-# 🛡️ OctaGuard
+<div align="center">
+  <h1>🛡️ OctaGuard</h1>
+  <p><strong>A Modern Cybersecurity SaaS Platform for Website Vulnerability Scanning</strong></p>
+  
+  [![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](#)
+  [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](#)
+  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](#)
+  [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](#)
+  [![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white)](#)
+  [![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)](#)
+</div>
 
-![License](https://img.shields.io/badge/license-ISC-blue.svg)
-![React](https://img.shields.io/badge/React-19.2-blue?logo=react)
-![Node.js](https://img.shields.io/badge/Node.js-Express-green?logo=node.js)
-![Prisma](https://img.shields.io/badge/Prisma-ORM-1B222D?logo=prisma)
+<hr/>
 
-**OctaGuard** is a comprehensive Web Vulnerability Scanner and Security Dashboard designed to simplify and streamline security posture management. It provides intuitive visualizations, intelligent risk recommendations, OWASP vulnerability mappings, and automated reporting.
+OctaGuard is an open-source cybersecurity SaaS platform foundation designed to perform basic, lightweight vulnerability scanning on web applications. It provides a sleek, modern, and highly responsive dashboard to present actionable security insights. 
 
-## ✨ Features
+**Note**: This project serves as a foundational shell and UI showcase. The current scanning engine performs basic checks (e.g., missing security headers, missing HTTPS, basic tech stack detection). It is **not** integrated with any real-time, advanced vulnerability engines.
 
-- 📊 **Security Dashboard**: View your security scorecard, executive summaries, and interactive risk matrices.
-- 🔍 **Vulnerability Scanning**: Identify potential risks and classify them according to standard OWASP Top 10 vulnerabilities.
-- 🤖 **Intelligent Scoring & Recommendations**: (Powered by Mock AI) Analyzes scan data and generates actionable remediation recommendations.
-- 📄 **Automated PDF Reporting**: Generate ready-to-present, highly detailed security reports.
-- 🔐 **Secure Architecture**: Built with a robust Node.js/Express backend paired with Prisma ORM.
+---
 
-## 💻 Tech Stack
+## ✨ Key Features
+
+- 🔐 **Authentication**: Secure Login and Registration flows.
+- 📊 **Interactive Dashboard**: Real-time data visualization using Recharts.
+- 🛡️ **Vulnerability Scanning**: Initiate scans and view vulnerability reports based on lightweight header and configuration checks.
+- 📜 **Scan History**: Keep track of previous scans, complete with severity categorization and resolution status.
+- 📄 **Export Reports**: Generate and download scan reports in PDF format.
+- 🎨 **Modern Aesthetics**: A beautifully crafted dark-themed UI built with TailwindCSS, Lucide React icons, and Sonner notifications.
+
+---
+
+## 📸 Screenshots
+
+### Demo Video
+![Demo Video](./assets/demo.gif)
+
+### Home Page
+![Home Page](./assets/home.png)
+
+### Dashboard Overview
+![Dashboard](./assets/dashboard.png)
+
+### Scan History
+![Scan History](./assets/history.png)
+
+### Settings
+![Settings](./assets/settings.png)
+
+---
+
+## 🏗️ Architecture & Tech Stack
+
+OctaGuard is built utilizing a decoupled Client-Server architecture.
 
 ### Frontend
-- **Framework:** [React](https://reactjs.org/) (via [Vite](https://vitejs.dev/))
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Visuals & Icons:** [Recharts](https://recharts.org/), [Lucide React](https://lucide.dev/)
-- **PDF Generation:** [jsPDF](https://parall.ax/products/jspdf), [html2canvas](https://html2canvas.hertzen.com/)
-- **Routing:** React Router DOM
+- **Framework**: [React.js](https://reactjs.org/) (v19)
+- **Bundler**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Routing**: [React Router](https://reactrouter.com/) (v7)
+- **Charts**: [Recharts](https://recharts.org/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Notifications**: [Sonner](https://sonner.emilkowal.ski/)
+- **PDF Generation**: `jspdf` & `html2canvas`
 
 ### Backend
-- **Server:** Node.js, [Express](https://expressjs.com/)
-- **Database ORM:** [Prisma](https://www.prisma.io/)
-- **Utilities:** Axios, CORS, Dotenv
+- **Runtime**: [Node.js](https://nodejs.org/)
+- **Framework**: [Express.js](https://expressjs.com/)
+- **ORM**: [Prisma](https://www.prisma.io/) (v6)
+- **Database**: SQLite (Development)
+- **Security**: CORS, Environment variable management (Dotenv)
+
+---
 
 ## 🚀 Getting Started
 
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
+Follow these steps to set up OctaGuard locally on your machine.
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/en/) (v18 or higher recommended)
-- npm or yarn
+Ensure you have the following installed:
+- **Node.js** (v18.x or higher)
+- **npm** or **yarn**
+- Git
 
-### Installation
+### 1. Clone the Repository
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/PurveshShinde/OctaGuard.git
-   cd OctaGuard
-   ```
+```bash
+git clone https://github.com/yourusername/OctaGuard.git
+cd OctaGuard
+```
 
-2. **Setup the Backend:**
-   ```bash
-   cd backend
-   npm install
-   # Configure your .env file
-   # Start the development server
-   npm run dev
-   ```
+### 2. Backend Setup
 
-3. **Setup the Frontend:**
-   ```bash
-   cd ../frontend
-   npm install
-   # Start the frontend application
-   npm run dev
-   ```
+Open a terminal and navigate to the backend directory:
+
+```bash
+cd backend
+npm install
+```
+
+**Environment Variables:**
+Create a `.env` file in the `backend` directory:
+```env
+PORT=5000
+DATABASE_URL="file:./dev.db"
+JWT_SECRET="your_super_secret_jwt_string_here"
+```
+
+**Database Initialization:**
+```bash
+# Initialize Prisma and create the database
+npx prisma migrate dev --name init
+npx prisma generate
+
+# Start the development server
+npm run dev
+```
+*The backend server will run on `http://localhost:5000`.*
+
+### 3. Frontend Setup
+
+Open a new terminal window and navigate to the frontend directory:
+
+```bash
+cd frontend
+npm install
+```
+
+**Environment Variables:**
+Create a `.env` file in the `frontend` directory:
+```env
+VITE_API_URL="http://localhost:5000/api"
+```
+
+**Start the Application:**
+```bash
+# Start the Vite development server
+npm run dev
+```
+*The frontend application will be accessible at `http://localhost:5173`.*
+
+---
 
 ## 📂 Project Structure
 
 ```text
 OctaGuard/
-├── backend/
-│   ├── src/           # Express server and API routes
-│   ├── prisma/        # Prisma schema and migrations
+├── backend/                  # Node.js + Express Backend
+│   ├── prisma/               # Database schema and migrations
+│   ├── src/
+│   │   ├── controllers/      # Route handlers (Logic)
+│   │   ├── routes/           # API routes definition
+│   │   ├── services/         # Business logic & external API calls
+│   │   └── server.js         # Express App Entry Point
+│   ├── .env                  # Backend configuration
 │   └── package.json
-└── frontend/
-    ├── src/
-    │   ├── components/# Reusable React components (Dashboard, Scanning, Reporting)
-    │   ├── context/   # React Context for state management
-    │   ├── hooks/     # Custom React Hooks
-    │   ├── layouts/   # Page layouts
-    │   ├── pages/     # Main views (Dashboard, ScanDetails, Settings, etc.)
-    │   ├── services/  # API calls, Scoring engine, and Mock AI
-    │   └── utils/     # Constants and helper functions
-    └── package.json
+│
+├── frontend/                 # React + Vite Frontend
+│   ├── src/
+│   │   ├── assets/           # Static files (images, icons)
+│   │   ├── components/       # Reusable UI components
+│   │   ├── context/          # React Context providers (State Management)
+│   │   ├── layouts/          # Page wrappers (e.g., DashboardLayout)
+│   │   ├── pages/            # Application pages (Dashboard, Login, etc.)
+│   │   ├── utils/            # Helper functions
+│   │   ├── App.jsx           # Main React component
+│   │   └── main.jsx          # React DOM entry point
+│   ├── .env                  # Frontend configuration
+│   ├── tailwind.config.js    # Tailwind styling config
+│   └── package.json
+│
+└── README.md                 # Project Documentation
 ```
 
-## 🤝 Contributors
+---
 
-OctaGuard was built with ❤️ by an incredible team. A huge thanks to the people who made this project possible:
+## 🤝 Contributing
 
-- **Purvesh Shailesh Shinde** - [@PurveshShinde](https://github.com/PurveshShinde)
-- **Sanjana Santosh More** - [@Sanjana2616](https://github.com/Sanjana2616)
-- **Shreya Shinde** - [@ShreyaMShinde](https://github.com/ShreyaMShinde)
-- **Triveni** - [@trinalawade](https://github.com/trinalawade)
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## 📄 License
+1. **Fork the Project**
+2. **Create your Feature Branch** (`git checkout -b feature/AmazingFeature`)
+3. **Commit your Changes** (`git commit -m 'Add some AmazingFeature'`)
+4. **Push to the Branch** (`git push origin feature/AmazingFeature`)
+5. **Open a Pull Request**
 
-This project is licensed under the ISC License.
+Please make sure to update tests as appropriate.
+
+---
+
+## 📝 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+
+## 🛡️ Security
+
+If you discover any security related issues, please email `security@yourdomain.com` instead of using the issue tracker.
+
+---
+
+<div align="center">
+  <p>Built with ❤️ by the open-source community.</p>
+</div>
